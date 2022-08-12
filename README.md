@@ -38,7 +38,7 @@ Synpress allows us to test metamask login, authentication and interaction with s
 - Add below script to package.json:
 ```
 "scripts": {
-    "test": "env-cmd -f .env npx synpress run -cf synpress.json --config supportFile='cypress/support/index.js'"
+    "test": "env-cmd -f .env npx synpress run -cf synpress.json --config supportFile='cypress/support/e2e.js'"
 }
 ```
 **Note: I removed this ``` --config supportFile='cypress/support/e2e.js ``` from the above script because it was not working for me with this part.**
