@@ -1,37 +1,84 @@
-## Welcome to GitHub Pages
+# Cypress Automation
+Cypress automation of web3/dapps using the Synpress that allows us to test metamask login, authentication and interaction with smart contracts.
 
-You can use the [editor on GitHub](https://github.com/mehmood-aqib/cypress-automation/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+### What is Synpress?
+Synpress is a wrapper around Cypress and also extending it with the help of Puppeteer . Resulting in custom commands which allow you to interact with MetaMask. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### How does it work? 
+It runs a global cypress before routine, that installs a MetaMask plugin, and configures it.
 
-### Markdown
+- passes metmask welcome page
+- imports wallet
+- changes network (defaults to kovan) or creates custom network and changes to it (depending on your setup)
+- switches back to Cypress window and starts testing
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+#### So remember: 
+Synpress allows us to test metamask login, authentication and interaction with smart contracts.
 
-```markdown
-Syntax highlighted code block
+## Synpress Setting up:
+#### First setup Cypress
+- Create an empty folder having name of your choice.
+- Open folder in visual studio code.
+- Ceate a package inside that empty folder using ``` npm init -y ```
+- Now install cypress using the command ``` npm i cypress``` 
+- After that open cypress using the command ```npx cypress open ```
+- Cypress will open and ask you to configure it. Just follow the steps and you are done.
+- Cypress will then show you the browser to open and you need to select the desire browser.
+- You can add a spec file in the cypress browser.
+- After that in VS code you can add a test file in the format "fileName.cy.js" under the e2e folder.
+- At the top of each file mention ``` /// <reference types="Cypress"/> ``` for autocompleting.
+- Now you can write the test cases.
 
-# Header 1
-## Header 2
-### Header 3
+#### Now setup Synpress
+- First of all install Synpress using command ``` npm i @synthetixio/synpress ```
+- Then install ``` npm install env-cm ```
 
-- Bulleted
-- List
+**Note: The env-cmd package installs an executable script named env-cmd which can be called before your scripts to easily load environment variables from an external file.**
 
-1. Numbered
-2. List
+- Add below script to package.json:
+```
+"scripts": {
+    "test": "env-cmd -f .env npx synpress run -cf synpress.json --config supportFile='cypress/support/e2e.js'"
+}
+```
+**Note: I removed this ``` --config supportFile='cypress/support/e2e.js ``` from the above script because it was not working for me with this part.**
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+- Now import/paste the following in support/e2e.js
+```
+import './commands'
+import "@synthetixio/synpress/support";
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+#### Add .env file
+- Now add the .env file to root level that includes seedphrase and the network name you want to connect in the below format.
+```
+NETWORK_NAME=kovan
+SECRET_WORDS="test, test, test, test, test, test, test, test, test, test, test, test"
+```
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/mehmood-aqib/cypress-automation/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+#### Add synpress.json file
+- Now add the synpress.json file at the root level that includes the configuration of synpress having the following the code:
+```
+{
+    "baseUrl": "https://app.unipilot.io/",
+    "userAgent": "synpress",
+    "retries": { "runMode": 0, "openMode": 0 },
+    "integrationFolder": "cypress/e2e",
+    "chromeWebSecurity": true,
+    "viewportWidth": 1366,
+    "viewportHeight": 850,
+    "component": {
+      "componentFolder": ".",
+      "testFiles": "**/*cy.{js,jsx,ts,tsx}"
+    },
+    "env": {
+      "coverage": false
+    },
+    "defaultCommandTimeout": 30000,
+    "pageLoadTimeout": 30000,
+    "requestTimeout": 30000,
+    "supportFile": "cypress/support/e2e.js"
+  }
+```
+#### Run the test
+- As we added scripts to our package.json we can now easily run our test with ``` npm run test ``` which stands for ``` env-cmd -f .env npx synpress run -cf synpress.json ```
