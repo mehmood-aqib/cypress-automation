@@ -83,3 +83,29 @@ SECRET_WORDS="test, test, test, test, test, test, test, test, test, test, test, 
 
 #### Run the test
 - As we added scripts to our package.json we can now easily run our test with ``` npm run test ``` which stands for ``` env-cmd -f .env npx synpress run -cf synpress.json ```
+
+## Important things to Remember:
+
+- There is a global before() which runs metamask setup before all tests:
+    - passes welcome page
+	- imports wallet
+	- changes network (defaults to kovan) or creates custom network and changes to it (depending on your setup)
+	- switches back to Cypress window and starts testing
+
+- It requires environmental variable called SECRET_WORDS to be present in following format => 'word1, word2, etc..' or private key in an environmental variable called PRIVATE_KEY.
+
+- To change default network (kovan), you can use NETWORK_NAME environmental variable, for example: NETWORK_NAME=rinkeby.
+
+- Available choices are: mainnet, ropsten, kovan, rinkeby, goerli and localhost.
+
+- To create and switch to custom network at metamask setup phase, use these:
+    - NETWORK_NAME => ex: synthetix
+    - RPC_URL => ex: https://synthetix-node.io
+    - CHAIN_ID => ex: 123
+    - SYMBOL (optional) => ex: SNX
+    - BLOCK_EXPLORER (optional) => ex: https://synthetix-explorer.io
+    - IS_TESTNET (optional) => ex: false
+
+- Metamask version is hardcoded. However, you can still override metamask with METAMASK_VERSION environmental variable, for example: METAMASK_VERSION=9.3.0 or METAMASK_VERSION=latest.
+
+- By default the Synpress setup the metamask password "Tester@1234"
