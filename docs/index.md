@@ -80,6 +80,7 @@ SECRET_WORDS="test, test, test, test, test, test, test, test, test, test, test, 
     "supportFile": "cypress/support/e2e.js"
   }
 ```
+
 #### Run the test
 - As we added scripts to our package.json we can now easily run our test with ``` npm run test ``` which stands for ``` env-cmd -f .env npx synpress run -cf synpress.json ```
 
