@@ -1,4 +1,5 @@
 /// <reference types="Cypress"/>
+/// <reference types="cypress-xpath" />
 import BaiscAuth from '../pages/0-auth'
 import AddLiquidity from '../pages/1-addLiquidity'
 
@@ -13,6 +14,7 @@ describe('Opening Unipilot website', () => {
         // const auth = new BaiscAuth();
         auth.login()
         cy.wait(1000*6)
+        cy.xpath()
     })
 
     it('Visit add liquidity page', () => { 

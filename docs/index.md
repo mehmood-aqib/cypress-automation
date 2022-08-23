@@ -109,3 +109,65 @@ SECRET_WORDS="test, test, test, test, test, test, test, test, test, test, test, 
 - Metamask version is hardcoded. However, you can still override metamask with METAMASK_VERSION environmental variable, for example: METAMASK_VERSION=9.3.0 or METAMASK_VERSION=latest.
 
 - By default the Synpress setup the metamask password "Tester@1234"
+
+### How to use X-Path in Cypress:
+- Cypress by default does not support X-Path.
+- For x-path to be used in cypress, we have to install a plugin "cypress-xpath".
+- The plugin can be found here https://github.com/cypress-io/cypress-xpath
+
+#### Install cypress-xpath: 
+- Install with npm ```npm install -D cypress-xpath```
+- Install with yarn ```yarn add cypress-xpath --dev```
+- After Installation of the plugin, include this ```require('cypress-xpath');``` in your project support file.
+- For cypress version 10 the support file can be found under the support folder -> e2e.js.
+- Just put the above command in that file.
+- To properly load the types for cy.xpath command, add to your spec file the following comment ```/// <reference types="cypress-xpath" />```
+
+#### Usage: 
+- After installation your cy object will have xpath command.
+```it('finds list items', () => {
+  cy.xpath('//ul[@class="todo-list"]//li').should('have.length', 3);
+});```
+
+- You can also chain xpath off of another command.
+```it('finds list items', () => {
+  cy.xpath('//ul[@class="todo-list"]').xpath('./li').should('have.length', 3);
+});```
+
+- As with other cy commands, it is scoped by cy.within().
+```it('finds list items', () => {
+  cy.xpath('//ul[@class="todo-list"]').within(() => {
+    cy.xpath('./li').should('have.length', 3);
+  });
+});```
+
+### Beware the XPath // trap:
+- In XPath the expression // means something very specific, and it might not be what you think. Contrary to common belief, // means "anywhere in the document" not "anywhere in the current context". As an example:
+```cy.xpath('//body').xpath('//script');```
+
+- You might expect this to find all script tags in the body, but actually, it finds all script tags in the entire document, not only those in the body! What you're looking for is the .// expression which means "any descendant of the current node":
+```cy.xpath('//body').xpath('.//script');```
+
+- The same thing goes for within:
+```cy.xpath('//body').within(() => {
+  cy.xpath('.//script');
+});```
+
+
+## What is XPath:
+- Xpath stands for XML Path Language.
+- Xpath is a query language used to access or naviagate in XML/HTMl document.
+- Xpath basically uses a path expression to select the node from the document.
+
+#### Absolute XPath
+- Absolute xpath start with ```/```, that means it will start selection from start or root node.
+- Absoulte xpath is lenghty and difficult to maintain.
+
+#### Relative XPath
+- Relative xpath start with ```//```, that means it will start selection from the current node that matches the selection.
+- Relative xpath is short and can easily handled.
+- In automation, mainly the relative xpath is used.
+
+#### How to verify xpath in browser console?
+- In order to verify the xpath in the browser console just use the command ```$x("/html/body/div[1]/div/div[1]/a")``` for absolute xpath and this ```$x("//a[@title='Home']")``` for relative xpath.
+

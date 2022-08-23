@@ -13,5 +13,8 @@
     "@synthetixio/synpress": "^1.2.0",
     "cypress": "^10.4.0",
     "env-cmd": "^10.1.0"
+  },
+  "devDependencies": {
+    "cypress-xpath": "^2.0.1"
   }
 }
