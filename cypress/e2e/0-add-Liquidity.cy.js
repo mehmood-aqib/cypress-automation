@@ -14,7 +14,6 @@ describe('Opening Unipilot website', () => {
         // const auth = new BaiscAuth();
         auth.login()
         cy.wait(1000*6)
-        cy.xpath()
     })
 
     it('Visit add liquidity page', () => { 
@@ -31,6 +30,11 @@ describe('Opening Unipilot website', () => {
     it('Select tokens', () => {
         liquidity.selectTokenFirst();
         liquidity.selectTokenSecond();
+     })
+
+     it('Create Vault', () => {
+        liquidity.settingInitialValue()
+        liquidity.createVault()
      })
 
 })

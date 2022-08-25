@@ -54,7 +54,13 @@ class AddLiquidity {
 
     settingInitialValue(){
         cy.wait(1000*10)
-        cy.get('.MuiContainer-maxWidthSm').find('input:nth(2)').type('2')
+        cy.get('.MuiContainer-maxWidthSm').find('input:nth(2)').type('1')
+        cy.contains('Create Vault').click()
+    }
+
+    createVault(){
+        cy.wait(2000)
+        cy.contains('Create Vault').click()
     }
 
 
