@@ -10,9 +10,11 @@
   "chromeWebSecurity": true,
   "viewportWidth": 1366,
   "viewportHeight": 850,
+  "testFiles": [
+    "4-Increaseliquidity.cy.js"
+  ],
   "component": {
-    "componentFolder": ".",
-    "testFiles": "**/*cy.{js,jsx,ts,tsx}"
+    "componentFolder": "."
   },
   "env": {
     "coverage": false
