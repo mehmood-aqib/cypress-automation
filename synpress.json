@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://app.unipilot.io/",
+  "baseUrl": "https://beta.unipilot.io/",
   "userAgent": "synpress",
   "retries": {
     "runMode": 0,
@@ -11,7 +11,7 @@
   "viewportWidth": 1366,
   "viewportHeight": 850,
   "testFiles": [
-    "4-Increaseliquidity.cy.js"
+    "1-add-NewLiquidity.cy.js"
   ],
   "component": {
     "componentFolder": "."

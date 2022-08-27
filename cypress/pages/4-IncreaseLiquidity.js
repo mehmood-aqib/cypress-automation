@@ -3,12 +3,12 @@
 
 class IncreaseLiquidity {
 
-    clickIncreaseLiquidity(){
+    clickIncreaseLiquidity() {
         cy.contains('Increase Liquidity').click()
-        cy.contains('OZN').should('exist')
-        cy.contains('MET').should('exist')
-        cy.wait(3000)
     }
-
+    
+    verifyPairSelected(pairName){
+        return cy.contains(pairName)
+    }
 }
 export default IncreaseLiquidity

@@ -3,21 +3,20 @@
 
 class PositionLiquidity {
 
-    selectPositionfromDropdown() {
-        cy.contains('Position').click()
-        cy.wait(2000)
-        cy.contains('Liquidity Positions').should('exist')
+    liquidityPosition(pairName){
+        return cy.contains(pairName)    // 'OZN/MET'
     }
 
-    liquidityPosition(){
-        cy.wait(2000)
-        cy.contains('OZN/MET').should('be.visible')
-        cy.wait(2000)
+    viewLiquiditydetails(pairName){
+        cy.contains(pairName).click()
     }
 
-    viewLiquiditydetails(){
-        cy.contains('OZN/MET').click()
-        cy.contains('Liquidity').should('exist')
+    VerifyDetails() {
+        let lpValue;
+        cy.contains('Liquidity').next().then(($Lpval) => {
+            lpValue = $Lpval.text();
+        })
+        cy.log('Lp Value', lpValue)
         cy.contains('Total Fees Accumulated').should('be.visible')
         cy.wait(1000*10)
         // cy.go('back')
