@@ -1,21 +1,19 @@
 /// <reference types="Cypress"/>
 /// <reference types="cypress-xpath" />
 import BaiscAuth from '../pages/0-auth'
-import AddLiquidity from '../pages/1-addNewLiquidity'
+import AddLiquidity from '../pages/2-addLiquidity';
 import PositionLiquidity from '../pages/3-positionLiquidity';
-import AddExistingLiquidity from '../pages/2-addExistingLiquidity';
 import IncreaseLiquidity from '../pages/4-IncreaseLiquidity';
 import RemoveLiquidity from '../pages/5-removeLiquidity';
 
 const auth = new BaiscAuth();
-const liquidity = new AddLiquidity();
+const addliquidty = new AddLiquidity()
 const position = new PositionLiquidity()
-const existLiquidity = new AddExistingLiquidity();
 const increase = new IncreaseLiquidity()
 const remove = new RemoveLiquidity()
 
 
-describe('Opening Unipilot website', () => {
+describe('Remove Liquidity Provided', () => {
 
     it('1- Visit Url and bypass basic Auth', () => {
         auth.login('https://beta.unipilot.io/positions')
@@ -23,32 +21,30 @@ describe('Opening Unipilot website', () => {
     })
 
     it('2- Connect wallet', () => {
-        liquidity.connectWallet();
+        addliquidty.connectWallet();
     })
 
     it('3- View Liquidity Position List', () => {
-        position.liquidityPosition()
+        position.liquidityPosition('OZN/MET').should('exist')   // pairName = OZN/MET
     })
 
     it('4- View Liquidity Details', () => {
-        position.viewLiquiditydetails()
+        position.viewLiquiditydetails('OZN/MET')     // pairName = OZN/MET
+        cy.wait(1000 * 5)
     })
 
     it('5- Click Remove Liquidity', () => {
         remove.clickRemoveLiquidity()
         cy.contains('Remove Liquidity').should('be.visible')
-        cy.contains('OZN/MET').should('exist')
+        cy.contains('50%').should('exist')
         cy.wait(3000)
     })
 
     it('6- Remove 50% liquidity', () => {
-        cy.contains('50%').click()
-        cy.contains('Remove').click()
-        cy.wait(2000)
-        cy.contains('We value your feedback').next().click()
-        cy.confirmMetamaskTransaction({ gasFee: 0.00084005, gasLimit: 560035 })
-        cy.switchToCypressWindow();
-        cy.wait(1000 * 60)
+        remove.selectAmounttoRemove('25%')
+        cy.wait(1000*2)
+        remove.removeButton().click()
+        remove.confirmRemoveTx()
     })
 
     it('7- Confirm Liquidity Removed', () => {

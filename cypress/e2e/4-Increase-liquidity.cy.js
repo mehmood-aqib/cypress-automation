@@ -11,7 +11,7 @@ const addliquidty = new AddLiquidity()
 const position = new PositionLiquidity()
 const increase = new IncreaseLiquidity()
 
-describe('Opening Unipilot website', () => {
+describe('Increase Existing Liquidity', () => {
 
     it('1- Visit Url and bypass basic Auth', () => {
         auth.login('https://beta.unipilot.io/positions')
