@@ -22,29 +22,30 @@ describe('Remove Liquidity Provided', () => {
 
     it('2- Connect wallet', () => {
         addliquidty.connectWallet();
+        cy.wait(1000 * 6)
     })
 
     it('3- View Liquidity Position List', () => {
         position.liquidityPosition('OZN/MET').should('exist')   // pairName = OZN/MET
+        cy.wait(1000 * 6)
     })
 
     it('4- View Liquidity Details', () => {
         position.viewLiquiditydetails('OZN/MET')     // pairName = OZN/MET
-        cy.wait(1000 * 5)
+        cy.wait(1000 * 6)
     })
 
-    it('5- Click Remove Liquidity', () => {
-        remove.clickRemoveLiquidity()
-        cy.contains('Remove Liquidity').should('be.visible')
-        cy.contains('50%').should('exist')
-        cy.wait(3000)
+    it('5- Go to Remove Liquidity Page', () => {
+        remove.removeLiquidity().click()
+        cy.wait(1000 * 6)
     })
 
     it('6- Remove 50% liquidity', () => {
         remove.selectAmounttoRemove('25%')
-        cy.wait(1000*2)
-        remove.removeButton().click()
+        cy.wait(1000 * 6)
+        remove.removeButton()
         remove.confirmRemoveTx()
+        
     })
 
     it('7- Confirm Liquidity Removed', () => {
@@ -53,6 +54,7 @@ describe('Remove Liquidity Provided', () => {
         cy.wait(3000)
         // check your liquidity
         cy.contains('OZN/MET').should('exist')
+        cy.wait(3000)
     })
 
 })

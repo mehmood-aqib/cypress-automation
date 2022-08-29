@@ -12,11 +12,11 @@ class AddLiquidity {
     }
 
     selectLiquidityDropdownItem(item) {
-        return cy.contains(item)
+        return cy.get('.MuiMenu-list').contains(item)
     }
 
-    verifyLiquidityPage(heading){
-        return cy.contains(heading)
+    verifyLiquidityPage(){
+        return cy.contains('Select Pair')
     }
 
     connectWallet() {
@@ -34,7 +34,7 @@ class AddLiquidity {
         cy.get('.MuiContainer-maxWidthSm').find('button:nth(0)').click()
 
         cy.findByPlaceholderText('Search by token name or paste address').type(tokenAddress)
-        cy.wait(2000)
+        cy.wait(1000*4)
         cy.contains('Import').click()
     }
 
@@ -43,13 +43,13 @@ class AddLiquidity {
         cy.get('.MuiContainer-maxWidthSm').find('button:nth(1)').click()
         
         cy.findByPlaceholderText('Search by token name or paste address').type(tokenAddress)
-        cy.wait(2000)
+        cy.wait(1000*4)
         cy.contains('Import').click()
     }
 
     EnterLiquidityAmount(amount) {
         // enter amount of liquidity you want to add
-        cy.get('body').find('input:nth(3)').type(amount)
+        return cy.get('body').find('input:nth(3)').type(amount)
     }
 
     ConfirmAddLiquidityTx() {
@@ -58,11 +58,13 @@ class AddLiquidity {
         cy.wait(2000)
         cy.confirmMetamaskTransaction({gasFee: 0.00160376 , gasLimit: 1069170})
         cy.switchToCypressWindow();
+        cy.wait(1000*60)
+        cy.get('body').click('bottomLeft')
     }
 
     confirmliquidityAdded() {
         // check your position
-        cy.contains('Liquidity Positions').should('exist')
+        return cy.contains('Liquidity Positions').should('exist')
     }
 
 

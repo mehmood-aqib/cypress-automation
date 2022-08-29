@@ -11,7 +11,7 @@
   "viewportWidth": 1366,
   "viewportHeight": 850,
   "testFiles": [
-    "1-add-NewLiquidity.cy.js"
+    "4-Increase-liquidity.cy.js"
   ],
   "component": {
     "componentFolder": "."

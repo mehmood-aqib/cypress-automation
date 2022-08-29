@@ -10,5 +10,6 @@ class IncreaseLiquidity {
     verifyPairSelected(pairName){
         return cy.contains(pairName)
     }
+    
 }
 export default IncreaseLiquidity

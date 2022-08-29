@@ -42,7 +42,6 @@ describe('Increase Existing Liquidity', () => {
 
     it('7- Confirm Liquidity Transaction', () => {
         addliquidty.ConfirmAddLiquidityTx()
-        cy.wait(1000 * 60)
     })
 
     it('8- Check Liquidity Increased', () => {

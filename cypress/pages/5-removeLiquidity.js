@@ -3,8 +3,8 @@
 
 class RemoveLiquidity {
 
-    clickRemoveLiquidity() {
-        cy.contains('Remove Liquidity').click()
+    removeLiquidity() {
+        return cy.contains('Remove Liquidity')
     }
 
     selectAmounttoRemove(amount) {
@@ -12,13 +12,18 @@ class RemoveLiquidity {
     }
 
     removeButton() {
-        return cy.contains('Remove')
+        cy.get('button').contains('Remove').click()
+        // cy.contains('Remove').click()
     }
 
     confirmRemoveTx() {
-        cy.contains('We value your feedback').next().click()
-        cy.confirmMetamaskTransaction({ gasFee: 0.00084005, gasLimit: 560035 })
+        // cy.contains('We value your feedback').next().click()
+        cy.get('body').click('bottomLeft')
+        cy.wait(1000*2)
+        cy.confirmMetamaskTransaction({ gasFee: 0.00112171, gasLimit: 12410385 })
         cy.switchToCypressWindow()
+        cy.wait(1000 * 60)
+        cy.get('body').click('bottomLeft')
     }
 
 }

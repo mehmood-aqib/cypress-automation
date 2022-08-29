@@ -21,7 +21,7 @@ describe('Create Vault', () => {
         cy.wait(2000)
         addliquidty.dropdownItems().should('be.visible');
         addliquidty.selectLiquidityDropdownItem('Add').click()
-        addliquidty.verifyLiquidityPage('Select Pair').should('exist')
+        addliquidty.verifyLiquidityPage().should('exist')
     })
 
     it('3- Connect wallet', () => {
