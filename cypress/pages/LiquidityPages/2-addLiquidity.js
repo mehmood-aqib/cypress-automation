@@ -56,7 +56,9 @@ class AddLiquidity {
         // confirming the liquidity tx
         cy.contains('Add liquidity').click()
         cy.wait(2000)
-        cy.confirmMetamaskTransaction({gasFee: 0.00160376 , gasLimit: 1069170})
+        // cy.confirmMetamaskTransaction({gasFee: 0.00160376 , gasLimit: 1069170})
+        // cy.confirmMetamaskTransaction()
+        cy.confirmMetamaskTransaction({ gasFee: 2 })
         cy.switchToCypressWindow();
         cy.wait(1000*60)
         cy.get('body').click('bottomLeft')

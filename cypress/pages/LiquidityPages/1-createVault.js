@@ -15,7 +15,8 @@ class CreateVault {
         cy.contains('Create Vault').click()
         // cy.contains('Please wait for confirmation').parent()
         cy.wait(2000)
-        cy.confirmMetamaskTransaction({gasFee: 0.019, gasLimit: 12410385})
+        // cy.confirmMetamaskTransaction({gasFee: 0.019, gasLimit: 12410385})
+        cy.confirmMetamaskTransaction({ gasFee: 2 })
         cy.switchToCypressWindow();
     }
 

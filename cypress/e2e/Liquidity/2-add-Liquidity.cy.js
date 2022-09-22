@@ -1,7 +1,7 @@
 /// <reference types="Cypress"/>
 /// <reference types="cypress-xpath" />
-import BaiscAuth from '../pages/0-auth'
-import AddLiquidity from '../pages/2-addLiquidity';
+import BaiscAuth from '../../pages/0-auth'
+import AddLiquidity from '../../pages/LiquidityPages/2-addLiquidity';
 
 
 const auth = new BaiscAuth();
@@ -10,7 +10,8 @@ const addliquidty = new AddLiquidity()
 
 describe('Add Liquidity of Existing tokens', () => {
     it('1- Visit Unipilot and bypass basic Auth', () => {
-        auth.login('https://beta.unipilot.io/')
+        // auth.login('https://unipilot-dev.surge.sh/')
+        cy.visit('https://unipilot-dev.surge.sh/')
         cy.wait(1000 * 2)
     }) 
 

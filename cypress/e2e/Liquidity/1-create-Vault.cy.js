@@ -1,22 +1,24 @@
 /// <reference types="Cypress"/>
 /// <reference types="cypress-xpath" />
-import BaiscAuth from '../pages/0-auth'
-import CreateVault from '../pages/1-createVault';
-import AddLiquidity from '../pages/2-addLiquidity';
+// import BaiscAuth from '../../pages/0-auth'
+import CreateVault from '../../pages/LiquidityPages/1-createVault';
+import AddLiquidity from '../../pages/LiquidityPages/2-addLiquidity';
 
 
-const auth = new BaiscAuth();
+// const auth = new BaiscAuth();
 const createVault = new CreateVault()
 const addliquidty = new AddLiquidity()
 
 
 describe('Create Vault', () => {
     it('1- Visit Unipilot and bypass basic Auth', () => {
-        auth.login('https://beta.unipilot.io/')
+        // auth.login('https://unipilot-dev.surge.sh/')
+        cy.visit('https://unipilot-dev.surge.sh/')
         cy.wait(1000 * 2)
     }) 
 
     it('2- Visit add liquidity page', () => {
+        // cy.visit('https://unipilot-dev.surge.sh/')
         addliquidty.LiquidityDropdown().click()
         cy.wait(2000)
         addliquidty.dropdownItems().should('be.visible');

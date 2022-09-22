@@ -1,8 +1,8 @@
 /// <reference types="Cypress"/>
 /// <reference types="cypress-xpath" />
-import BaiscAuth from '../pages/0-auth'
-import AddLiquidity from '../pages/2-addLiquidity'
-import PositionLiquidity from '../pages/3-positionLiquidity';
+import BaiscAuth from '../../pages/0-auth'
+import AddLiquidity from '../../pages/LiquidityPages/2-addLiquidity'
+import PositionLiquidity from '../../pages/LiquidityPages/3-positionLiquidity';
 
 
 const auth = new BaiscAuth();
@@ -13,7 +13,8 @@ const position = new PositionLiquidity()
 describe('Liquidity Position Details', () => { 
 
     it('1- Visit Url and bypass basic Auth', () => {
-        auth.login('https://beta.unipilot.io/positions')
+        // auth.login('https://unipilot-dev.surge.sh/positions')
+        cy.visit('https://unipilot-dev.surge.sh/positions')
         cy.wait(1000 * 2)
     })
 
@@ -28,7 +29,7 @@ describe('Liquidity Position Details', () => {
 
     it('4- View Liquidity Details', () => {
         position.viewLiquiditydetails('OZN/MET')     // pairName = OZN/MET
-        cy.wait(1000*5)
+        cy.wait(1000*30)
     })
 
 })

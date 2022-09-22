@@ -1,10 +1,10 @@
 /// <reference types="Cypress"/>
 /// <reference types="cypress-xpath" />
-import BaiscAuth from '../pages/0-auth'
-import AddLiquidity from '../pages/2-addLiquidity';
-import PositionLiquidity from '../pages/3-positionLiquidity';
-import IncreaseLiquidity from '../pages/4-IncreaseLiquidity';
-import RemoveLiquidity from '../pages/5-removeLiquidity';
+import BaiscAuth from '../../pages/0-auth'
+import AddLiquidity from '../../pages/LiquidityPages/2-addLiquidity';
+import PositionLiquidity from '../../pages/LiquidityPages/3-positionLiquidity';
+import IncreaseLiquidity from '../../pages/LiquidityPages/4-IncreaseLiquidity';
+import RemoveLiquidity from '../../pages/LiquidityPages/5-removeLiquidity';
 
 const auth = new BaiscAuth();
 const addliquidty = new AddLiquidity()
@@ -16,7 +16,8 @@ const remove = new RemoveLiquidity()
 describe('Remove Liquidity Provided', () => {
 
     it('1- Visit Url and bypass basic Auth', () => {
-        auth.login('https://beta.unipilot.io/positions')
+        // auth.login('https://unipilot-dev.surge.sh/positions')
+        cy.visit('https://unipilot-dev.surge.sh/positions')
         cy.wait(1000 * 2)
     })
 

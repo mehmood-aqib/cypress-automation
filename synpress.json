@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://beta.unipilot.io/",
+  "baseUrl": "https://unipilot-dev.surge.sh/",
   "userAgent": "synpress",
   "retries": {
     "runMode": 0,
@@ -11,7 +11,7 @@
   "viewportWidth": 1366,
   "viewportHeight": 850,
   "testFiles": [
-    "4-Increase-liquidity.cy.js"
+    "Staking/2-rewards.cy.js"
   ],
   "component": {
     "componentFolder": "."

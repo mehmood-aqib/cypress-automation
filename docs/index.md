@@ -31,7 +31,7 @@ Synpress allows us to test metamask login, authentication and interaction with s
 
 #### Now setup Synpress
 - First of all install Synpress using command ``` npm i @synthetixio/synpress ```
-- Then install ``` npm install env-cm ```
+- Then install ``` npm install env-cmd ```
 
 **Note: The env-cmd package installs an executable script named env-cmd which can be called before your scripts to easily load environment variables from an external file.**
 
